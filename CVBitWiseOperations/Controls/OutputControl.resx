@@ -57,20 +57,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="LeftInputImage.Mat" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAE5FbWd1LkNWLlBsYXRmb3JtLk5ldFN0YW5kYXJkLCBDdWx0dXJl
-        PW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPTcyODExMjY3MjJhYjQ0MzgFAQAAAAtFbWd1LkNWLk1hdAUA
-        AAAEUm93cwRDb2xzCURlcHRoVHlwZRBOdW1iZXJPZkNoYW5uZWxzBUJ5dGVzAAAAAAIICAgIAgAAAAAA
-        AAAAAAAAAAAAAAEAAAAKCw==
-</value>
-  </data>
-  <data name="RightInputImage.Mat" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAE5FbWd1LkNWLlBsYXRmb3JtLk5ldFN0YW5kYXJkLCBDdWx0dXJl
-        PW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPTcyODExMjY3MjJhYjQ0MzgFAQAAAAtFbWd1LkNWLk1hdAUA
-        AAAEUm93cwRDb2xzCURlcHRoVHlwZRBOdW1iZXJPZkNoYW5uZWxzBUJ5dGVzAAAAAAIICAgIAgAAAAAA
-        AAAAAAAAAAAAAAEAAAAKCw==
-</value>
-  </data>
 </root>

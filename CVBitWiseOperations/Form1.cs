@@ -14,6 +14,21 @@ namespace CVBitWiseOperations
 {
     public partial class Form1 : Form
     {
+        public struct SelectControlItem
+        {
+            public string Name { get; set; }
+            public Func<UserControl> GetControl { get; set; }
+            public SelectControlItem(string name, Func<UserControl> getControl)
+            {
+                Name = name;
+                GetControl = getControl;
+            }
+            public override string ToString()
+            {
+                return Name;
+            }
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -21,7 +36,8 @@ namespace CVBitWiseOperations
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            SelectControl.Items.Add(new SelectControlItem("BitwiseOperations", () => new BitwiseOperationControl()));
+            SelectControl.Items.Add(new SelectControlItem("ColorDisplay", () => new ColorDisplay()));
         }
 
         //private void button1_Click(object sender, EventArgs e)
@@ -36,7 +52,14 @@ namespace CVBitWiseOperations
 
         private void AddColorDisplay_Click(object sender, EventArgs e)
         {
-            ColorDisplayContainer.Controls.Add(new ColorDisplayControl());
+            ControlContainer.Controls.Add(new ColorDisplay());
+        }
+
+        private void SelectControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selected = (ComboBox)sender;
+            SelectControlItem selectedItem = (SelectControlItem)selected.SelectedItem;
+            ControlContainer.Controls.Add(selectedItem.GetControl());
         }
     }
 }

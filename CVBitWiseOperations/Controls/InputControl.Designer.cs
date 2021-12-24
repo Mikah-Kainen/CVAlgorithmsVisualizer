@@ -1,7 +1,7 @@
 ﻿
 namespace CVBitWiseOperations.Controls
 {
-    partial class SelectionControl
+    partial class InputControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,45 +30,45 @@ namespace CVBitWiseOperations.Controls
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.Image = new Emgu.CV.UI.ImageBox();
-            this.SelectImage = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.Image)).BeginInit();
+            this.SelectedImage = new Emgu.CV.UI.ImageBox();
+            this.SelectImage = new System.Windows.Forms.ComboBox();
+            ((System.ComponentModel.ISupportInitialize)(this.SelectedImage)).BeginInit();
             this.SuspendLayout();
             // 
-            // Image
+            // SelectedImage
             // 
-            this.Image.Location = new System.Drawing.Point(3, 32);
-            this.Image.Name = "Image";
-            this.Image.Size = new System.Drawing.Size(142, 130);
-            this.Image.TabIndex = 2;
-            this.Image.TabStop = false;
+            this.SelectedImage.Location = new System.Drawing.Point(3, 32);
+            this.SelectedImage.Name = "SelectedImage";
+            this.SelectedImage.Size = new System.Drawing.Size(142, 130);
+            this.SelectedImage.TabIndex = 2;
+            this.SelectedImage.TabStop = false;
+            this.SelectedImage.Click += new System.EventHandler(this.Image_Click);
             // 
             // SelectImage
             // 
-            this.SelectImage.Location = new System.Drawing.Point(32, 3);
+            this.SelectImage.FormattingEnabled = true;
+            this.SelectImage.Location = new System.Drawing.Point(0, 3);
             this.SelectImage.Name = "SelectImage";
-            this.SelectImage.Size = new System.Drawing.Size(79, 23);
+            this.SelectImage.Size = new System.Drawing.Size(133, 23);
             this.SelectImage.TabIndex = 3;
-            this.SelectImage.Text = "SelectImage";
-            this.SelectImage.UseVisualStyleBackColor = true;
-            this.SelectImage.Click += new System.EventHandler(this.SelectImage_Click);
+            this.SelectImage.SelectedIndexChanged += new System.EventHandler(this.SelectImage_SelectedIndexChanged);
             // 
-            // SelectionControl
+            // InputControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.SelectImage);
-            this.Controls.Add(this.Image);
-            this.Name = "SelectionControl";
+            this.Controls.Add(this.SelectedImage);
+            this.Name = "InputControl";
             this.Size = new System.Drawing.Size(148, 166);
             this.Load += new System.EventHandler(this.SelectionControl_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.Image)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SelectedImage)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private Emgu.CV.UI.ImageBox Image;
-        private System.Windows.Forms.Button SelectImage;
+        private Emgu.CV.UI.ImageBox SelectedImage;
+        private System.Windows.Forms.ComboBox SelectImage;
     }
 }

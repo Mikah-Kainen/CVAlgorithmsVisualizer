@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace CVBitWiseOperations.Controls
 {
-    public partial class BitwiseOperationControl : UserControl
+    public partial class BitwiseOperationControl : BaseUserControl
     {
         public struct Operation
         {
@@ -44,19 +44,26 @@ namespace CVBitWiseOperations.Controls
         {
             var selected = ((ComboBox)sender).SelectedItem;
 
-            using Mat leftBox = LeftInputImage.Mat.Clone();
-            using Mat rightBox = RightInputImage.Mat.Clone();
+            using Mat leftBox = LeftInputImage.Image.Clone();
+            using Mat rightBox = RightInputImage.Image.Clone();
 
             ((Operation)selected).MatOperation(leftBox, rightBox, ResultMat);
-            ResultImage.Image = ResultMat;
+            Result.Image = ResultMat;
         }
 
         private void BitwiseOperationControl_Load(object sender, EventArgs e)
         {
+            Result.NameChanged += Result_NameChanged;
+
             SelectOperation.Items.Add(new Operation("OR", (a, b, c) => CvInvoke.BitwiseOr(a, b, c)));
             SelectOperation.Items.Add(new Operation("AND", (a, b, c) => CvInvoke.BitwiseAnd(a, b, c)));
             SelectOperation.Items.Add(new Operation("Not", (a, b, c) => CvInvoke.BitwiseNot(b, c)));
             SelectOperation.Items.Add(new Operation("Xor", (a, b, c) => CvInvoke.BitwiseXor(a, b, c)));
+        }
+
+        private void Result_NameChanged(object sender, NewNameEvent e)
+        {
+            UpdateName(((ICanChangeName)sender).Image, e.OldName, e.NewName);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -70,6 +77,11 @@ namespace CVBitWiseOperations.Controls
         }
 
         private void NameResult_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RightInputImage_Load(object sender, EventArgs e)
         {
 
         }

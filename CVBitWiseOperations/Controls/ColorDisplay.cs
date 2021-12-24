@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace CVBitWiseOperations.Controls
 {
-    public partial class ColorDisplayControl : UserControl
+    public partial class ColorDisplay : BaseUserControl
     {
-        public ColorDisplayControl()
+        public ColorDisplay()
         {
             InitializeComponent();
         }
@@ -32,9 +32,9 @@ namespace CVBitWiseOperations.Controls
 
         private void Display_Click(object sender, EventArgs e)
         {
-            if (ImageSelection.Mat == null) { return; }
+            if (ImageSelection.Image == null) { return; }
 
-            (int RVal, int GVal, int BVal) = ImageSelection.Mat.GetRGB();
+            (int RVal, int GVal, int BVal) = ImageSelection.Image.GetRGB();
             RValue.Text = $"{RVal}";
             GValue.Text = $"{GVal}";
             BValue.Text = $"{BVal}";
@@ -42,6 +42,11 @@ namespace CVBitWiseOperations.Controls
             int GreyScaleVal = RVal + GVal + BVal;
             GreyScaleVal /= 3;
             GreyScaleValue.Text = $"{GreyScaleVal}";
+        }
+
+        private void ColorDisplay_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

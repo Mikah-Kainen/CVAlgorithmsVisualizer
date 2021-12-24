@@ -32,12 +32,12 @@ namespace CVBitWiseOperations
             this.AddPanel = new System.Windows.Forms.Button();
             this.ControlContainer = new System.Windows.Forms.FlowLayoutPanel();
             this.AddColorDisplay = new System.Windows.Forms.Button();
-            this.ColorDisplayContainer = new System.Windows.Forms.FlowLayoutPanel();
+            this.SelectControl = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // AddPanel
             // 
-            this.AddPanel.Location = new System.Drawing.Point(36, 12);
+            this.AddPanel.Location = new System.Drawing.Point(667, 12);
             this.AddPanel.Name = "AddPanel";
             this.AddPanel.Size = new System.Drawing.Size(75, 23);
             this.AddPanel.TabIndex = 0;
@@ -49,7 +49,7 @@ namespace CVBitWiseOperations
             // 
             this.ControlContainer.Location = new System.Drawing.Point(12, 41);
             this.ControlContainer.Name = "ControlContainer";
-            this.ControlContainer.Size = new System.Drawing.Size(682, 682);
+            this.ControlContainer.Size = new System.Drawing.Size(1152, 682);
             this.ControlContainer.TabIndex = 1;
             // 
             // AddColorDisplay
@@ -62,19 +62,21 @@ namespace CVBitWiseOperations
             this.AddColorDisplay.UseVisualStyleBackColor = true;
             this.AddColorDisplay.Click += new System.EventHandler(this.AddColorDisplay_Click);
             // 
-            // ColorDisplayContainer
+            // SelectControl
             // 
-            this.ColorDisplayContainer.Location = new System.Drawing.Point(724, 41);
-            this.ColorDisplayContainer.Name = "ColorDisplayContainer";
-            this.ColorDisplayContainer.Size = new System.Drawing.Size(440, 682);
-            this.ColorDisplayContainer.TabIndex = 3;
+            this.SelectControl.FormattingEnabled = true;
+            this.SelectControl.Location = new System.Drawing.Point(12, 13);
+            this.SelectControl.Name = "SelectControl";
+            this.SelectControl.Size = new System.Drawing.Size(121, 23);
+            this.SelectControl.TabIndex = 3;
+            this.SelectControl.SelectedIndexChanged += new System.EventHandler(this.SelectControl_SelectedIndexChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1176, 735);
-            this.Controls.Add(this.ColorDisplayContainer);
+            this.Controls.Add(this.SelectControl);
             this.Controls.Add(this.AddColorDisplay);
             this.Controls.Add(this.ControlContainer);
             this.Controls.Add(this.AddPanel);
@@ -90,7 +92,7 @@ namespace CVBitWiseOperations
         private System.Windows.Forms.Button AddPanel;
         private System.Windows.Forms.FlowLayoutPanel ControlContainer;
         private System.Windows.Forms.Button AddColorDisplay;
-        private System.Windows.Forms.FlowLayoutPanel ColorDisplayContainer;
+        private System.Windows.Forms.ComboBox SelectControl;
     }
 }
 

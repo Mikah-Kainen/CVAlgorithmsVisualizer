@@ -1,7 +1,7 @@
 ﻿
 namespace CVBitWiseOperations.Controls
 {
-    partial class ColorDisplayControl
+    partial class ColorDisplay
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,8 +29,8 @@ namespace CVBitWiseOperations.Controls
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ColorDisplayControl));
-            this.ImageSelection = new CVBitWiseOperations.Controls.SelectionControl();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ColorDisplay));
+            this.ImageSelection = new CVBitWiseOperations.Controls.InputControl();
             this.R = new System.Windows.Forms.Label();
             this.G = new System.Windows.Forms.Label();
             this.B = new System.Windows.Forms.Label();
@@ -45,7 +45,7 @@ namespace CVBitWiseOperations.Controls
             // ImageSelection
             // 
             this.ImageSelection.Location = new System.Drawing.Point(3, 3);
-            this.ImageSelection.Mat = ((Emgu.CV.Mat)(resources.GetObject("ImageSelection.Mat")));
+            this.ImageSelection.Image = ((Emgu.CV.Mat)(resources.GetObject("ImageSelection.Mat")));
             this.ImageSelection.Name = "ImageSelection";
             this.ImageSelection.Size = new System.Drawing.Size(148, 166);
             this.ImageSelection.TabIndex = 0;
@@ -135,7 +135,7 @@ namespace CVBitWiseOperations.Controls
             this.GreyScaleValue.TabIndex = 13;
             this.GreyScaleValue.Text = "GreyScaleValue";
             // 
-            // ColorDisplayControl
+            // ColorDisplay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -149,8 +149,9 @@ namespace CVBitWiseOperations.Controls
             this.Controls.Add(this.G);
             this.Controls.Add(this.R);
             this.Controls.Add(this.ImageSelection);
-            this.Name = "ColorDisplayControl";
+            this.Name = "ColorDisplay";
             this.Size = new System.Drawing.Size(243, 172);
+            this.Load += new System.EventHandler(this.ColorDisplay_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -158,7 +159,7 @@ namespace CVBitWiseOperations.Controls
 
         #endregion
 
-        private SelectionControl ImageSelection;
+        private InputControl ImageSelection;
         private System.Windows.Forms.Label R;
         private System.Windows.Forms.Label G;
         private System.Windows.Forms.Label B;
