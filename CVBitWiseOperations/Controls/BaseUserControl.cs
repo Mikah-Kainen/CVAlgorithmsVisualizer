@@ -17,7 +17,7 @@ namespace CVBitWiseOperations.Controls
         public static readonly Dictionary<string, Mat> SavedImages = new Dictionary<string, Mat>();
         public static readonly List<BaseUserControl> AllControls = new List<BaseUserControl>();
 
-        public static InputControl[] Inputs { get; set; }
+        public InputControl[] Inputs { get; set; }
 
         public BaseUserControl()
         {
@@ -42,17 +42,14 @@ namespace CVBitWiseOperations.Controls
             if (oldName == newName) { return; }
             if (SavedImages.ContainsKey(newName)) { return; }
 
-            if (oldName != null)
-            {
-                SavedImages.Remove(oldName);
-            }
             SavedImages.Add(newName, targetMat);
-            for (int i = 0; i < Inputs.Length; i++)
+            for (int z = 0; z < AllControls.Count; z ++)
             {
-                Inputs[i].RemoveInput(oldName);
-                Inputs[i].AddInput(newName);
+                for (int i = 0; i < AllControls[z].Inputs.Length; i++)
+                {
+                    AllControls[z].Inputs[i].AddInput(newName);
+                }
             }
-
         }
     }
 }

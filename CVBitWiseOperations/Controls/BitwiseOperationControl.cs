@@ -85,5 +85,10 @@ namespace CVBitWiseOperations.Controls
         {
 
         }
+
+        private void LeftInputImage_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

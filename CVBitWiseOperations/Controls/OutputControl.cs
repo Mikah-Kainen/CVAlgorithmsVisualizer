@@ -53,7 +53,7 @@ namespace CVBitWiseOperations.Controls
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            NameChanged.Invoke(this, new NewNameEvent(OldName, NameText.Text));
+            NameChanged?.Invoke(this, new NewNameEvent(OldName, NameText.Text));
             OldName = NameText.Text;
         }
 

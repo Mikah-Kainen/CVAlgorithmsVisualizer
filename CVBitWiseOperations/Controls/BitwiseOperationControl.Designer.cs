@@ -29,7 +29,6 @@ namespace CVBitWiseOperations.Controls
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BitwiseOperationControl));
             this.LeftInputImage = new CVBitWiseOperations.Controls.InputControl();
             this.RightInputImage = new CVBitWiseOperations.Controls.InputControl();
             this.SelectOperation = new System.Windows.Forms.ComboBox();
@@ -40,15 +39,14 @@ namespace CVBitWiseOperations.Controls
             // LeftInputImage
             // 
             this.LeftInputImage.Location = new System.Drawing.Point(19, 25);
-            this.LeftInputImage.Image = ((Emgu.CV.Mat)(resources.GetObject("LeftInputImage.Mat")));
             this.LeftInputImage.Name = "LeftInputImage";
             this.LeftInputImage.Size = new System.Drawing.Size(148, 166);
             this.LeftInputImage.TabIndex = 0;
+            this.LeftInputImage.Load += new System.EventHandler(this.LeftInputImage_Load);
             // 
             // RightInputImage
             // 
             this.RightInputImage.Location = new System.Drawing.Point(263, 25);
-            this.RightInputImage.Image = ((Emgu.CV.Mat)(resources.GetObject("RightInputImage.Mat")));
             this.RightInputImage.Name = "RightInputImage";
             this.RightInputImage.Size = new System.Drawing.Size(148, 166);
             this.RightInputImage.TabIndex = 1;
@@ -75,9 +73,9 @@ namespace CVBitWiseOperations.Controls
             // 
             // Result
             // 
-            this.Result.Image = null;
             this.Result.Location = new System.Drawing.Point(464, 25);
             this.Result.Name = "Result";
+            this.Result.OldName = null;
             this.Result.Size = new System.Drawing.Size(150, 168);
             this.Result.TabIndex = 6;
             // 
@@ -90,6 +88,7 @@ namespace CVBitWiseOperations.Controls
             this.Controls.Add(this.SelectOperation);
             this.Controls.Add(this.RightInputImage);
             this.Controls.Add(this.LeftInputImage);
+            this.Inputs = new CVBitWiseOperations.Controls.InputControl[0];
             this.Name = "BitwiseOperationControl";
             this.Size = new System.Drawing.Size(631, 224);
             this.Load += new System.EventHandler(this.BitwiseOperationControl_Load);

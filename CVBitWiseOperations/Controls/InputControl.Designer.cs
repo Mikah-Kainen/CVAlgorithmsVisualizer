@@ -40,6 +40,7 @@ namespace CVBitWiseOperations.Controls
             this.SelectedImage.Location = new System.Drawing.Point(3, 32);
             this.SelectedImage.Name = "SelectedImage";
             this.SelectedImage.Size = new System.Drawing.Size(142, 130);
+            this.SelectedImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.SelectedImage.TabIndex = 2;
             this.SelectedImage.TabStop = false;
             this.SelectedImage.Click += new System.EventHandler(this.Image_Click);

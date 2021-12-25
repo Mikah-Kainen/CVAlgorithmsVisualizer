@@ -43,6 +43,7 @@ namespace CVBitWiseOperations.Controls
             this.OutputImage.Location = new System.Drawing.Point(0, 37);
             this.OutputImage.Name = "OutputImage";
             this.OutputImage.Size = new System.Drawing.Size(159, 137);
+            this.OutputImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.OutputImage.TabIndex = 2;
             this.OutputImage.TabStop = false;
             this.OutputImage.Click += new System.EventHandler(this.Output_Click);
