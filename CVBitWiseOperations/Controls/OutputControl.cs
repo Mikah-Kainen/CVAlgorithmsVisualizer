@@ -23,7 +23,7 @@ namespace CVBitWiseOperations.Controls
         {
             get
             {
-                return ((Mat)OutputImage.Image).Clone();
+                return (Mat)OutputImage.Image;
             }
             set
             { 
@@ -35,7 +35,12 @@ namespace CVBitWiseOperations.Controls
 
         private void Output_Click(object sender, EventArgs e)
         {
-
+            FileDialog dialog = new SaveFileDialog() { AddExtension = true, Filter = "Image Files|*.jpg;*.jpeg;*.jfif;*.png" };
+            DialogResult res = dialog.ShowDialog();
+            if (res == DialogResult.OK)
+            {
+                CvInvoke.Imwrite(dialog.FileName, Image);
+            }
         }
 
         private void OutputControl_Load(object sender, EventArgs e)

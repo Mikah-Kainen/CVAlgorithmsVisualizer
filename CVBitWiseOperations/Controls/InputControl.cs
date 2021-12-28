@@ -19,7 +19,7 @@ namespace CVBitWiseOperations.Controls
         {
             get
             {
-                return ((Mat)SelectedImage.Image).Clone();
+                return (Mat)SelectedImage.Image;
             }
             set
             {
@@ -50,9 +50,16 @@ namespace CVBitWiseOperations.Controls
 
         private void SelectImage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            using Mat oldImage = Image.Clone();
+            using Mat oldImage = Image;
             Image = BaseUserControl.SavedImages[(string)SelectImage.SelectedItem];
-            ImageReturned?.Invoke(this, new NewImageEvent(oldImage, Image));
+            if (oldImage != null)
+            {
+                ImageReturned?.Invoke(this, new NewImageEvent(oldImage.Clone(), Image));
+            }
+            else
+            {
+                ImageReturned?.Invoke(this, new NewImageEvent(null, Image));
+            }
         }
 
         private void Image_Click(object sender, EventArgs e)
@@ -64,7 +71,7 @@ namespace CVBitWiseOperations.Controls
                 using Mat loaded = CvInvoke.Imread(dialog.FileName);
                 Image = loaded.Clone();
             }
-            ImageReturned.Invoke(this, new NewImageEvent(null, Image));
+            ImageReturned?.Invoke(this, new NewImageEvent(null, Image));
         }
     }
 }
