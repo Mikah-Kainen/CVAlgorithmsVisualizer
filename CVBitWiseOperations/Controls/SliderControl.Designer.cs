@@ -30,14 +30,16 @@ namespace CVBitWiseOperations.Controls
         private void InitializeComponent()
         {
             this.Slider = new System.Windows.Forms.TrackBar();
-            this.label1 = new System.Windows.Forms.Label();
+            this.ValueLabel = new System.Windows.Forms.Label();
             this.ValText = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.MinVal = new System.Windows.Forms.TextBox();
             this.MaxVal = new System.Windows.Forms.TextBox();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.Slider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ValText)).BeginInit();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // Slider
@@ -49,18 +51,18 @@ namespace CVBitWiseOperations.Controls
             this.Slider.TabIndex = 0;
             this.Slider.Scroll += new System.EventHandler(this.Slider_Scroll);
             // 
-            // label1
+            // ValueLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(25, 15);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Val:";
+            this.ValueLabel.AutoSize = true;
+            this.ValueLabel.Location = new System.Drawing.Point(3, 0);
+            this.ValueLabel.Name = "ValueLabel";
+            this.ValueLabel.Size = new System.Drawing.Size(25, 15);
+            this.ValueLabel.TabIndex = 1;
+            this.ValueLabel.Text = "Val:";
             // 
             // ValText
             // 
-            this.ValText.Location = new System.Drawing.Point(34, 7);
+            this.ValText.Location = new System.Drawing.Point(34, 3);
             this.ValText.Name = "ValText";
             this.ValText.Size = new System.Drawing.Size(50, 23);
             this.ValText.TabIndex = 2;
@@ -100,23 +102,34 @@ namespace CVBitWiseOperations.Controls
             this.MaxVal.TabIndex = 6;
             this.MaxVal.TextChanged += new System.EventHandler(this.MaxVal_TextChanged);
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.ValueLabel);
+            this.flowLayoutPanel1.Controls.Add(this.ValText);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(139, 29);
+            this.flowLayoutPanel1.TabIndex = 7;
+            // 
             // SliderControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.MaxVal);
             this.Controls.Add(this.MinVal);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.ValText);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.Slider);
+            this.Inputs = new CVBitWiseOperations.Controls.InputControl[0];
             this.Name = "SliderControl";
             this.Size = new System.Drawing.Size(283, 83);
             this.Load += new System.EventHandler(this.SliderControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Slider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ValText)).EndInit();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -125,11 +138,12 @@ namespace CVBitWiseOperations.Controls
         #endregion
 
         private System.Windows.Forms.TrackBar Slider;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label ValueLabel;
         private System.Windows.Forms.NumericUpDown ValText;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox MinVal;
         private System.Windows.Forms.TextBox MaxVal;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

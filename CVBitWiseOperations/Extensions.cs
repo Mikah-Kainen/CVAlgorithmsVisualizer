@@ -1,4 +1,5 @@
 ﻿using Emgu.CV;
+using Emgu.CV.Structure;
 using Emgu.CV.Util;
 
 using System;
@@ -43,6 +44,17 @@ namespace CVBitWiseOperations
             returnValue.B /= (bitmap.Height * bitmap.Width);
 
             return returnValue;
+        }
+
+        public static MCvScalar ToMCvScalar(this Color color)
+        {
+            return new Emgu.CV.Structure.MCvScalar(color.B, color.G, color.R);
+        }
+        
+
+        public static Point ToPoint(this PointF point)
+        {
+            return new Point((int)point.X, (int)point.Y);
         }
     }
 }

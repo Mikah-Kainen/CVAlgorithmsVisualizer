@@ -42,7 +42,7 @@ namespace CVBitWiseOperations.Controls
             if (oldName == newName) { return; }
             if (SavedImages.ContainsKey(newName)) { return; }
 
-            SavedImages.Add(newName, targetMat);
+            SavedImages.Add(newName, targetMat.Clone());
             for (int z = 0; z < AllControls.Count; z ++)
             {
                 for (int i = 0; i < AllControls[z].Inputs.Length; i++)

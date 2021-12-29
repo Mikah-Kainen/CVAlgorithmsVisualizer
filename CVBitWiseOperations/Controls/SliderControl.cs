@@ -15,6 +15,13 @@ namespace CVBitWiseOperations.Controls
             InitializeComponent();
         }
 
+        public void SpecifyValueUse(string use) //replaces the "Val:" label with a "use" label
+        {
+            Size sizeOfText = TextRenderer.MeasureText(use, Font);
+            ValueLabel.Text = use;
+            ValueLabel.Size = new Size(Math.Min(Math.Max(sizeOfText.Width, 40), 100), ValueLabel.Height);
+        }
+
         private void SliderControl_Load(object sender, EventArgs e)
         {
             MinVal.Text = $"{Slider.Minimum}";
@@ -54,5 +61,7 @@ namespace CVBitWiseOperations.Controls
                 Slider.Maximum = parsed;
             }
         }
+
+        
     }
 }

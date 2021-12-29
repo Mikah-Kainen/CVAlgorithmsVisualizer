@@ -13,7 +13,7 @@ namespace CVBitWiseOperations.Controls
     public partial class InputControl : UserControl, ICanReturnImage
     {
 
-        
+
 
         public Mat Image
         {
@@ -50,16 +50,18 @@ namespace CVBitWiseOperations.Controls
 
         private void SelectImage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            using Mat oldImage = Image;
+            using Mat oldImage = Image?.Clone();
+
             Image = BaseUserControl.SavedImages[(string)SelectImage.SelectedItem];
             if (oldImage != null)
             {
-                ImageReturned?.Invoke(this, new NewImageEvent(oldImage.Clone(), Image));
+                ImageReturned?.Invoke(this, new NewImageEvent(oldImage.Clone(), Image.Clone()));
             }
             else
             {
-                ImageReturned?.Invoke(this, new NewImageEvent(null, Image));
+                ImageReturned?.Invoke(this, new NewImageEvent(null, Image.Clone()));
             }
+
         }
 
         private void Image_Click(object sender, EventArgs e)
@@ -71,7 +73,7 @@ namespace CVBitWiseOperations.Controls
                 using Mat loaded = CvInvoke.Imread(dialog.FileName);
                 Image = loaded.Clone();
             }
-            ImageReturned?.Invoke(this, new NewImageEvent(null, Image));
+            ImageReturned?.Invoke(this, new NewImageEvent(null, Image.Clone()));
         }
     }
 }

@@ -48,7 +48,7 @@ namespace CVBitWiseOperations
             this.SelectControl.FormattingEnabled = true;
             this.SelectControl.Location = new System.Drawing.Point(328, 3);
             this.SelectControl.Name = "SelectControl";
-            this.SelectControl.Size = new System.Drawing.Size(121, 23);
+            this.SelectControl.Size = new System.Drawing.Size(285, 23);
             this.SelectControl.TabIndex = 3;
             this.SelectControl.SelectedIndexChanged += new System.EventHandler(this.SelectControl_SelectedIndexChanged);
             // 
