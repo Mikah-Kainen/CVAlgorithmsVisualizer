@@ -45,15 +45,14 @@ namespace CVBitWiseOperations.Controls
 
         private void OutputControl_Load(object sender, EventArgs e)
         {
-            NameText.Size = new Size(60, NameText.Height);
-            
+            NameText.Size = new Size(150, NameText.Height);
         }
 
         private void NameText_TextChanged(object sender, EventArgs e)
         {
             Size sizeOfText = TextRenderer.MeasureText(NameText.Text, Font);
 
-            NameText.Size = new Size(Math.Min(Math.Max(sizeOfText.Width, 60), 100), NameText.Height);
+            NameText.Size = new Size(Math.Min(Math.Max(sizeOfText.Width, 150), 280), NameText.Height);
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
