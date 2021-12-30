@@ -10,6 +10,22 @@ namespace CVBitWiseOperations.Controls
 {
     public partial class SliderControl : BaseUserControl
     {
+        public bool CanChangeMax = true;
+        public bool CanChangeMin = true;
+        public int Max
+        {
+            get { return Slider.Maximum; }
+            set { MaxVal.Text = $"{Slider.Maximum}"; Slider.Maximum = value; }
+        }
+        public int Min {
+            get { return Slider.Minimum; }
+            set { MinVal.Text = $"{Slider.Minimum}"; Slider.Minimum = value; }
+        }
+
+        public int Value {
+            get { return Slider.Value; }
+            set { ValText.Value = value; Slider.Value = value; }
+        }
         public SliderControl()
         {
             InitializeComponent();
@@ -24,8 +40,8 @@ namespace CVBitWiseOperations.Controls
 
         private void SliderControl_Load(object sender, EventArgs e)
         {
-            MinVal.Text = $"{Slider.Minimum}";
             MaxVal.Text = $"{Slider.Maximum}";
+            MinVal.Text = $"{Slider.Minimum}";
         }
 
         private void Slider_Scroll(object sender, EventArgs e)
@@ -44,21 +60,35 @@ namespace CVBitWiseOperations.Controls
             }
         }
 
-        private void MinVal_TextChanged(object sender, EventArgs e)
-        {
-            int parsed;
-            if (int.TryParse(MinVal.Text, out parsed))
-            {
-                Slider.Minimum = parsed;
-            }
-        }
 
         private void MaxVal_TextChanged(object sender, EventArgs e)
         {
-            int parsed;
-            if (int.TryParse(MaxVal.Text, out parsed))
+            if (CanChangeMax)
             {
-                Slider.Maximum = parsed;
+                int parsed;
+                if (int.TryParse(MaxVal.Text, out parsed))
+                {
+                    Slider.Maximum = parsed;
+                }
+            }
+            else
+            {
+                MaxVal.Text = $"{Slider.Maximum}";
+            }
+        }
+        private void MinVal_TextChanged(object sender, EventArgs e)
+        {
+            if (CanChangeMin)
+            {
+                int parsed;
+                if (int.TryParse(MinVal.Text, out parsed))
+                {
+                    Slider.Minimum = parsed;
+                }
+            }
+            else
+            {
+                MinVal.Text = $"{Slider.Minimum}";
             }
         }
 
