@@ -40,15 +40,20 @@ namespace CVBitWiseOperations.Controls
         {
             Result.NameChanged += Result_NameChanged;
             Mat = new Mat();
-            SelectConversion.Items.Add(new SelectConversionItem("GreyScaleToRGB", () =>
+            SelectConversion.Items.Add(new SelectConversionItem("RGB To GreyScale", () =>
             {
-                CvInvoke.CvtColor(Input.Image, Mat, Emgu.CV.CvEnum.ColorConversion.Gray2Rgb);
-                Result.Image = Mat.Clone();
+                CvInvoke.CvtColor(Input.Image.Clone(), Mat, Emgu.CV.CvEnum.ColorConversion.Rgb2Gray);
+                Result.SetImage(Mat, true);
+            }));
+            SelectConversion.Items.Add(new SelectConversionItem("GreyScale To RGB", () =>
+            {
+                CvInvoke.CvtColor(Input.Image.Clone(), Mat, Emgu.CV.CvEnum.ColorConversion.Gray2Rgb);
+                Result.SetImage(Mat, true);
             })) ;
-            SelectConversion.Items.Add(new SelectConversionItem("RGBToHSV", () =>
+            SelectConversion.Items.Add(new SelectConversionItem("RGB To HSV", () =>
             {
-                CvInvoke.CvtColor(Input.Image, Mat, Emgu.CV.CvEnum.ColorConversion.Rgb2Hsv);
-                Result.Image = Mat.Clone();
+                CvInvoke.CvtColor(Input.Image.Clone(), Mat, Emgu.CV.CvEnum.ColorConversion.Rgb2Hsv);
+                Result.SetImage(Mat, true);
             }));
         }
 

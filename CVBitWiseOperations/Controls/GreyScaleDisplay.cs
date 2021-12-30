@@ -42,10 +42,10 @@ namespace CVBitWiseOperations.Controls
 
         private void Input_ImageReturned(object sender, NewImageEvent e)
         {
-            (Mat R, Mat G, Mat B) GreyScaleMats = e.NewImage.GetRGBGreyScale();
-            ROutput.Image = GreyScaleMats.R;
-            GOutput.Image = GreyScaleMats.G;
-            BOutput.Image = GreyScaleMats.B;
+            (Mat R, Mat G, Mat B) GreyScaleMats = e.NewImage.Clone().GetRGBGreyScale();
+            ROutput.SetImage(GreyScaleMats.R, true);
+            GOutput.SetImage(GreyScaleMats.G, true);
+            BOutput.SetImage(GreyScaleMats.B, true);
         }
 
         private void outputControl3_Load(object sender, EventArgs e)

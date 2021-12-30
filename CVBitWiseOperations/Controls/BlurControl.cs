@@ -52,7 +52,7 @@ namespace CVBitWiseOperations.Controls
         {
             int cernelSize = ((CernelSizeSelectionItem)SelectCernelSize.SelectedItem).CernelSize;
             CvInvoke.Blur(Input.Image, Mat, new Size(cernelSize, cernelSize), new Point(-1, -1));
-            Result.Image = Mat.Clone();
+            Result.SetImage(Mat, true);
         }
 
         private void Result_NameChanged(object sender, NewNameEvent e)

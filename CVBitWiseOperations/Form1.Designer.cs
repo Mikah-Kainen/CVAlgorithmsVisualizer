@@ -38,6 +38,7 @@ namespace CVBitWiseOperations
             this.MyTabs = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.BreakImage = new System.Windows.Forms.Button();
             this.ButtonPanel.SuspendLayout();
             this.MyTabs.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -59,6 +60,7 @@ namespace CVBitWiseOperations
             this.ButtonPanel.Controls.Add(this.TabNameText);
             this.ButtonPanel.Controls.Add(this.textBox1);
             this.ButtonPanel.Controls.Add(this.SelectControl);
+            this.ButtonPanel.Controls.Add(this.BreakImage);
             this.ButtonPanel.Location = new System.Drawing.Point(12, 0);
             this.ButtonPanel.Name = "ButtonPanel";
             this.ButtonPanel.Size = new System.Drawing.Size(978, 35);
@@ -129,6 +131,16 @@ namespace CVBitWiseOperations
             this.flowLayoutPanel1.Size = new System.Drawing.Size(964, 557);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
+            // BreakImage
+            // 
+            this.BreakImage.Location = new System.Drawing.Point(619, 3);
+            this.BreakImage.Name = "BreakImage";
+            this.BreakImage.Size = new System.Drawing.Size(75, 23);
+            this.BreakImage.TabIndex = 8;
+            this.BreakImage.Text = "button1";
+            this.BreakImage.UseVisualStyleBackColor = true;
+            this.BreakImage.Click += new System.EventHandler(this.BreakImage_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -157,6 +169,7 @@ namespace CVBitWiseOperations
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TextBox TabNameText;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button BreakImage;
     }
 }
 

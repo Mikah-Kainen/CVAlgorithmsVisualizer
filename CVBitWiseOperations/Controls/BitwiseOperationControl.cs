@@ -48,7 +48,7 @@ namespace CVBitWiseOperations.Controls
             using Mat rightBox = RightInputImage.Image.Clone();
 
             ((Operation)selected).MatOperation(leftBox, rightBox, ResultMat);
-            Result.Image = ResultMat;
+            Result.SetImage(ResultMat, true);
         }
 
         private void BitwiseOperationControl_Load(object sender, EventArgs e)
@@ -59,6 +59,7 @@ namespace CVBitWiseOperations.Controls
             SelectOperation.Items.Add(new Operation("AND", (a, b, c) => CvInvoke.BitwiseAnd(a, b, c)));
             SelectOperation.Items.Add(new Operation("Not", (a, b, c) => CvInvoke.BitwiseNot(b, c)));
             SelectOperation.Items.Add(new Operation("Xor", (a, b, c) => CvInvoke.BitwiseXor(a, b, c)));
+            SelectOperation.Items.Add(new Operation("AbsDiff", (a, b, c) => CvInvoke.AbsDiff(a, b, c)));
         }
 
         private void Result_NameChanged(object sender, NewNameEvent e)

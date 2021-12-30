@@ -25,9 +25,17 @@ namespace CVBitWiseOperations.Controls
             {
                 return (Mat)OutputImage.Image;
             }
-            set
-            { 
-                OutputImage.Image = value;
+        }
+
+        public void SetImage(Mat image, bool shouldClone)
+        {
+            if(shouldClone)
+            {
+                OutputImage.Image = image.Clone();
+            }
+            else
+            {
+                OutputImage.Image = image;
             }
         }
 
@@ -47,8 +55,8 @@ namespace CVBitWiseOperations.Controls
         private int maxWidth;
         private void OutputControl_Load(object sender, EventArgs e)
         {
-            minWidth = 150;
-            maxWidth = 280;
+            minWidth = 60;
+            maxWidth = 100;
             NameText.Size = new Size(minWidth, NameText.Height);
         }
 

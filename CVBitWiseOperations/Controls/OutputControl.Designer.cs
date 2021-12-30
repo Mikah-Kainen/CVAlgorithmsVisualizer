@@ -41,10 +41,9 @@ namespace CVBitWiseOperations.Controls
             // OutputImage
             // 
             this.OutputImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.OutputImage.Location = new System.Drawing.Point(0, 118);
-            this.OutputImage.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
+            this.OutputImage.Location = new System.Drawing.Point(0, 37);
             this.OutputImage.Name = "OutputImage";
-            this.OutputImage.Size = new System.Drawing.Size(454, 438);
+            this.OutputImage.Size = new System.Drawing.Size(157, 138);
             this.OutputImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.OutputImage.TabIndex = 2;
             this.OutputImage.TabStop = false;
@@ -52,19 +51,17 @@ namespace CVBitWiseOperations.Controls
             // 
             // NameText
             // 
-            this.NameText.Location = new System.Drawing.Point(9, 10);
-            this.NameText.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
+            this.NameText.Location = new System.Drawing.Point(3, 3);
             this.NameText.Name = "NameText";
-            this.NameText.Size = new System.Drawing.Size(287, 55);
+            this.NameText.Size = new System.Drawing.Size(103, 23);
             this.NameText.TabIndex = 3;
             this.NameText.TextChanged += new System.EventHandler(this.NameText_TextChanged);
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(314, 10);
-            this.SaveButton.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
+            this.SaveButton.Location = new System.Drawing.Point(112, 3);
             this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(117, 74);
+            this.SaveButton.Size = new System.Drawing.Size(41, 23);
             this.SaveButton.TabIndex = 4;
             this.SaveButton.Text = "Save";
             this.SaveButton.UseVisualStyleBackColor = true;
@@ -75,21 +72,19 @@ namespace CVBitWiseOperations.Controls
             this.FlowPanel.Controls.Add(this.NameText);
             this.FlowPanel.Controls.Add(this.SaveButton);
             this.FlowPanel.Location = new System.Drawing.Point(0, 0);
-            this.FlowPanel.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.FlowPanel.Name = "FlowPanel";
-            this.FlowPanel.Size = new System.Drawing.Size(449, 106);
+            this.FlowPanel.Size = new System.Drawing.Size(157, 33);
             this.FlowPanel.TabIndex = 5;
             this.FlowPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.FlowPanel_Paint);
             // 
             // OutputControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(20F, 48F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.FlowPanel);
             this.Controls.Add(this.OutputImage);
-            this.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.Name = "OutputControl";
-            this.Size = new System.Drawing.Size(454, 557);
+            this.Size = new System.Drawing.Size(159, 174);
             this.Load += new System.EventHandler(this.OutputControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.OutputImage)).EndInit();
             this.FlowPanel.ResumeLayout(false);

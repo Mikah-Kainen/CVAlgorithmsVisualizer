@@ -45,7 +45,6 @@ namespace CVBitWiseOperations.Controls
             // ImageSelection
             // 
             this.ImageSelection.Location = new System.Drawing.Point(3, 3);
-            this.ImageSelection.Image = ((Emgu.CV.Mat)(resources.GetObject("ImageSelection.Mat")));
             this.ImageSelection.Name = "ImageSelection";
             this.ImageSelection.Size = new System.Drawing.Size(148, 166);
             this.ImageSelection.TabIndex = 0;

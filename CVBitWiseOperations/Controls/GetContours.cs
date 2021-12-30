@@ -41,6 +41,8 @@ namespace CVBitWiseOperations.Controls
 
         private void GetContours_Load(object sender, EventArgs e)
         {
+            Result.NameChanged += Result_NameChanged;
+
             ColorPicker.BackColor = Color.Red;
             WidthValue.Value = 3;
             width = 3;
@@ -50,7 +52,7 @@ namespace CVBitWiseOperations.Controls
             SelectOperation.Items.Add(new SelectOperationItem("Outline", (Mat input, VectorOfVectorOfPoint contours) =>
             {
                 CvInvoke.DrawContours(input, contours, -1, ColorPicker.BackColor.ToMCvScalar(), width);
-                Result.Image = input.Clone();
+                Result.SetImage(input, true);
             }));
 
             SelectOperation.Items.Add(new SelectOperationItem("BoundingRectangle", (Mat input, VectorOfVectorOfPoint contours) =>
@@ -59,9 +61,10 @@ namespace CVBitWiseOperations.Controls
                 for (int i = 0; i < length; i++)
                 {
                     Rectangle boundingRect = CvInvoke.BoundingRectangle(contours[i]);
-                    CvInvoke.Rectangle(input, boundingRect, ColorPicker.BackColor.ToMCvScalar(), width);
+                    Rectangle nicerRect = new Rectangle(boundingRect.X - 5, boundingRect.Y - 5, boundingRect.Width + 10, boundingRect.Height + 10) ;
+                    CvInvoke.Rectangle(input, nicerRect, ColorPicker.BackColor.ToMCvScalar(), width);
                 }
-                Result.Image = input.Clone();
+                Result.SetImage(input, true);
             }));
 
             SelectOperation.Items.Add(new SelectOperationItem("ClosestRectangle", (Mat input, VectorOfVectorOfPoint contours) =>
@@ -72,17 +75,17 @@ namespace CVBitWiseOperations.Controls
                     RotatedRect closestRect = CvInvoke.MinAreaRect(contours[i]);
                     MCvScalar currentColor = ColorPicker.BackColor.ToMCvScalar();
                     Point[] vertices = closestRect.GetVertices().Select((PointF pf) => new Point((int)pf.X, (int)pf.Y)).ToArray();
-                    for (int z = 0; z < vertices.Length; z ++)
+                    for (int z = 0; z < vertices.Length; z++)
                     {
                         int next = z + 1;
-                        if(next >= vertices.Length)
+                        if (next >= vertices.Length)
                         {
                             next = 0;
                         }
                         CvInvoke.Line(input, vertices[z], vertices[next], currentColor, width);
                     }
                 }
-                Result.Image = input.Clone();
+                Result.SetImage(input, true);
             }));
 
             SelectOperation.Items.Add(new SelectOperationItem("BoundingCircle", (Mat input, VectorOfVectorOfPoint contours) =>
@@ -93,8 +96,13 @@ namespace CVBitWiseOperations.Controls
                     CircleF currentCircle = CvInvoke.MinEnclosingCircle(contours[i]);
                     CvInvoke.Circle(input, currentCircle.Center.ToPoint(), (int)currentCircle.Radius, ColorPicker.BackColor.ToMCvScalar(), width);
                 }
-                Result.Image = input.Clone();
+                Result.SetImage(input, true);
             }));
+        }
+
+        private void Result_NameChanged(object sender, NewNameEvent e)
+        {
+            UpdateName(((ICanChangeName)sender).Image, e.OldName, e.NewName);
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -111,7 +119,7 @@ namespace CVBitWiseOperations.Controls
         private void ColorPicker_Click(object sender, EventArgs e)
         {
             var dialog = ColorDialog.ShowDialog();
-            if(dialog == DialogResult.OK)
+            if (dialog == DialogResult.OK)
             {
                 ColorPicker.BackColor = ColorDialog.Color;
             }
@@ -122,16 +130,25 @@ namespace CVBitWiseOperations.Controls
             width = (int)WidthValue.Value;
         }
 
-        private Mat temp;
+        private Mat tempInput;
+        private Mat tempContours;
 
         private void SelectOperation_SelectedIndexChanged(object sender, EventArgs e)
         {
-            temp = Input.Image.Clone();
+            tempInput = Input.Image.Clone();
+            tempContours = ContourInput.Image?.Clone() ?? tempInput;
             VectorOfVectorOfPoint contours = new VectorOfVectorOfPoint();
-            CvInvoke.FindContours(temp, contours, new Mat(), Emgu.CV.CvEnum.RetrType.External, Emgu.CV.CvEnum.ChainApproxMethod.ChainApproxNone);
-            CvInvoke.CvtColor(temp, temp, Emgu.CV.CvEnum.ColorConversion.Gray2Bgr);
+            if(tempContours.NumberOfChannels > 1)
+            {
+                CvInvoke.CvtColor(tempContours.Clone(), tempContours, Emgu.CV.CvEnum.ColorConversion.Bgr2Gray);
+            }
+            CvInvoke.FindContours(tempContours, contours, new Mat(), Emgu.CV.CvEnum.RetrType.External, Emgu.CV.CvEnum.ChainApproxMethod.ChainApproxNone);
+            if (tempInput.NumberOfChannels == 1)
+            {
+                CvInvoke.CvtColor(tempInput.Clone(), tempInput, Emgu.CV.CvEnum.ColorConversion.Gray2Bgr);
+            }
 
-            ((SelectOperationItem)SelectOperation.SelectedItem).Operation(temp, contours);
+            ((SelectOperationItem)SelectOperation.SelectedItem).Operation(tempInput, contours);
         }
     }
 }

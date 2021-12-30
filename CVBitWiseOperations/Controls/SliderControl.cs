@@ -8,18 +8,21 @@ using System.Windows.Forms;
 
 namespace CVBitWiseOperations.Controls
 {
-    public partial class SliderControl : BaseUserControl
+    public partial class SliderControl : BaseUserControl, ICanReturnInt
     {
         public bool CanChangeMax = true;
         public bool CanChangeMin = true;
+
+        public event EventHandler<int> IntReturned;
+
         public int Max
         {
             get { return Slider.Maximum; }
-            set { MaxVal.Text = $"{Slider.Maximum}"; Slider.Maximum = value; }
+            set { MaxVal.Text = $"{value}"; ValText.Maximum = value; Slider.Maximum = value; }
         }
         public int Min {
             get { return Slider.Minimum; }
-            set { MinVal.Text = $"{Slider.Minimum}"; Slider.Minimum = value; }
+            set { MinVal.Text = $"{value}"; ValText.Minimum = value; Slider.Minimum = value; }
         }
 
         public int Value {
@@ -57,6 +60,7 @@ namespace CVBitWiseOperations.Controls
             if ((int)ValText.Value >= Slider.Minimum && (int)ValText.Value <= Slider.Maximum)
             {
                 Slider.Value = (int)ValText.Value;
+                IntReturned?.Invoke(this, (int)ValText.Value);
             }
         }
 

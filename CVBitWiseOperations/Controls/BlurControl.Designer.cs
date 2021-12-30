@@ -37,25 +37,23 @@ namespace CVBitWiseOperations.Controls
             // 
             // Input
             // 
-            this.Input.Image = null;
             this.Input.Location = new System.Drawing.Point(3, 3);
             this.Input.Name = "Input";
-            this.Input.Size = new System.Drawing.Size(148, 166);
+            this.Input.Size = new System.Drawing.Size(169, 177);
             this.Input.TabIndex = 0;
             // 
             // Result
             // 
-            this.Result.Image = null;
-            this.Result.Location = new System.Drawing.Point(244, 0);
+            this.Result.Location = new System.Drawing.Point(257, 0);
             this.Result.Name = "Result";
             this.Result.OldName = null;
-            this.Result.Size = new System.Drawing.Size(159, 174);
+            this.Result.Size = new System.Drawing.Size(159, 180);
             this.Result.TabIndex = 1;
             // 
             // SelectCernelSize
             // 
             this.SelectCernelSize.FormattingEnabled = true;
-            this.SelectCernelSize.Location = new System.Drawing.Point(157, 40);
+            this.SelectCernelSize.Location = new System.Drawing.Point(170, 39);
             this.SelectCernelSize.Name = "SelectCernelSize";
             this.SelectCernelSize.Size = new System.Drawing.Size(81, 23);
             this.SelectCernelSize.TabIndex = 2;
@@ -64,7 +62,7 @@ namespace CVBitWiseOperations.Controls
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(157, 13);
+            this.label1.Location = new System.Drawing.Point(178, 21);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 15);
             this.label1.TabIndex = 3;
@@ -74,12 +72,14 @@ namespace CVBitWiseOperations.Controls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.label1);
             this.Controls.Add(this.SelectCernelSize);
             this.Controls.Add(this.Result);
             this.Controls.Add(this.Input);
+            this.Inputs = new CVBitWiseOperations.Controls.InputControl[0];
             this.Name = "BlurControl";
-            this.Size = new System.Drawing.Size(407, 178);
+            this.Size = new System.Drawing.Size(414, 180);
             this.Load += new System.EventHandler(this.BlurControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

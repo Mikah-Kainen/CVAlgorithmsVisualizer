@@ -1,5 +1,7 @@
 ﻿using CVBitWiseOperations.Controls;
 
+using Emgu.CV;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -87,6 +89,48 @@ namespace CVBitWiseOperations
             string newName = TabNameText.Text;
             TabNameText.Text = "TabNameText";
             MyTabs.SelectedTab.Text = newName;
+        }
+
+        Bitmap loaded;
+        private void BreakImage_Click(object sender, EventArgs e)
+        {
+            OutputControl output1 = new OutputControl();
+            OutputControl output2 = new OutputControl();
+
+            FileDialog dialog = new OpenFileDialog();
+            DialogResult res = dialog.ShowDialog();
+            if (res == DialogResult.OK || res == DialogResult.Yes)
+            {
+                loaded = CvInvoke.Imread(dialog.FileName).ToBitmap();
+            }
+
+            Rectangle rectangle1 = new Rectangle(4, 4, 367, 245); 
+            Bitmap image1 = new Bitmap(rectangle1.Width, rectangle1.Height);
+            Rectangle rectangle2 = new Rectangle(4, 252, 367, 245);
+            Bitmap image2 = new Bitmap(rectangle2.Width, rectangle2.Height);
+
+            for (int y = 0; y < rectangle1.Height; y ++)
+            {
+                for(int x = 0; x < rectangle1.Width; x ++)
+                {
+                    image1.SetPixel(x, y, loaded.GetPixel(x + rectangle1.X, y + rectangle1.Y));
+                }
+            }
+
+            for (int y = 0; y < rectangle2.Height; y++)
+            {
+                for (int x = 0; x < rectangle2.Width; x++)
+                {
+                    image2.SetPixel(x, y, loaded.GetPixel(x + rectangle2.X, y + rectangle2.Y));
+                }
+            }
+
+            output1.SetImage(image1.ToMat(), false);
+            output2.SetImage(image2.ToMat(), false);
+            //maybe I do need to clone
+
+            MyTabs.SelectedTab.Controls.OfType<FlowLayoutPanel>().ToArray()[0].Controls.Add(output1);
+            MyTabs.SelectedTab.Controls.OfType<FlowLayoutPanel>().ToArray()[0].Controls.Add(output2);
         }
     }
 }

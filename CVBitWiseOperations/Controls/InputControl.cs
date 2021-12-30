@@ -21,9 +21,17 @@ namespace CVBitWiseOperations.Controls
             {
                 return (Mat)SelectedImage.Image;
             }
-            set
+        }
+
+        public void SetImage(Mat image, bool shouldClone)
+        {
+            if(shouldClone)
             {
-                SelectedImage.Image = value;
+                SelectedImage.Image = image.Clone();
+            }
+            else
+            {
+                SelectedImage.Image = image;
             }
         }
 
@@ -52,7 +60,7 @@ namespace CVBitWiseOperations.Controls
         {
             using Mat oldImage = Image?.Clone();
 
-            Image = BaseUserControl.SavedImages[(string)SelectImage.SelectedItem];
+            SetImage(BaseUserControl.SavedImages[(string)SelectImage.SelectedItem], true);
             if (oldImage != null)
             {
                 ImageReturned?.Invoke(this, new NewImageEvent(oldImage.Clone(), Image.Clone()));
@@ -70,8 +78,7 @@ namespace CVBitWiseOperations.Controls
             DialogResult res = dialog.ShowDialog();
             if (res == DialogResult.OK || res == DialogResult.Yes)
             {
-                using Mat loaded = CvInvoke.Imread(dialog.FileName);
-                Image = loaded.Clone();
+                SetImage(CvInvoke.Imread(dialog.FileName), true);
             }
             ImageReturned?.Invoke(this, new NewImageEvent(null, Image.Clone()));
         }

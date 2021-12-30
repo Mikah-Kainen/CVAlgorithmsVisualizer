@@ -22,6 +22,7 @@ namespace CVBitWiseOperations.Controls
     {
         public event EventHandler<NewNameEvent> NameChanged;
 
-        public Mat Image { get; set; }
+        public Mat Image { get; }
+        //might need to add the setImage function
     }
 }

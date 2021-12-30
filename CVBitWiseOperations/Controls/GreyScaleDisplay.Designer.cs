@@ -40,39 +40,35 @@ namespace CVBitWiseOperations.Controls
             // 
             // Input
             // 
-            this.Input.Image = null;
             this.Input.Location = new System.Drawing.Point(3, 18);
             this.Input.Name = "Input";
-            this.Input.Size = new System.Drawing.Size(148, 166);
+            this.Input.Size = new System.Drawing.Size(162, 184);
             this.Input.TabIndex = 0;
             this.Input.Load += new System.EventHandler(this.inputControl1_Load);
             // 
             // ROutput
             // 
-            this.ROutput.Image = null;
             this.ROutput.Location = new System.Drawing.Point(212, 18);
             this.ROutput.Name = "ROutput";
             this.ROutput.OldName = null;
-            this.ROutput.Size = new System.Drawing.Size(159, 174);
+            this.ROutput.Size = new System.Drawing.Size(159, 184);
             this.ROutput.TabIndex = 1;
             this.ROutput.Load += new System.EventHandler(this.ROutput_Load);
             // 
             // GOutput
             // 
-            this.GOutput.Image = null;
             this.GOutput.Location = new System.Drawing.Point(377, 18);
             this.GOutput.Name = "GOutput";
             this.GOutput.OldName = null;
-            this.GOutput.Size = new System.Drawing.Size(159, 174);
+            this.GOutput.Size = new System.Drawing.Size(159, 184);
             this.GOutput.TabIndex = 2;
             // 
             // BOutput
             // 
-            this.BOutput.Image = null;
             this.BOutput.Location = new System.Drawing.Point(542, 18);
             this.BOutput.Name = "BOutput";
             this.BOutput.OldName = null;
-            this.BOutput.Size = new System.Drawing.Size(159, 174);
+            this.BOutput.Size = new System.Drawing.Size(159, 184);
             this.BOutput.TabIndex = 3;
             this.BOutput.Load += new System.EventHandler(this.outputControl3_Load);
             // 
@@ -116,7 +112,7 @@ namespace CVBitWiseOperations.Controls
             this.Controls.Add(this.Input);
             this.Inputs = new CVBitWiseOperations.Controls.InputControl[0];
             this.Name = "GreyScaleDisplay";
-            this.Size = new System.Drawing.Size(710, 196);
+            this.Size = new System.Drawing.Size(710, 205);
             this.Load += new System.EventHandler(this.GreyScaleDisplay_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -38,10 +38,9 @@ namespace CVBitWiseOperations.Controls
             // SelectedImage
             // 
             this.SelectedImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.SelectedImage.Location = new System.Drawing.Point(9, 102);
-            this.SelectedImage.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
+            this.SelectedImage.Location = new System.Drawing.Point(3, 32);
             this.SelectedImage.Name = "SelectedImage";
-            this.SelectedImage.Size = new System.Drawing.Size(406, 416);
+            this.SelectedImage.Size = new System.Drawing.Size(157, 138);
             this.SelectedImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.SelectedImage.TabIndex = 2;
             this.SelectedImage.TabStop = false;
@@ -50,22 +49,20 @@ namespace CVBitWiseOperations.Controls
             // SelectImage
             // 
             this.SelectImage.FormattingEnabled = true;
-            this.SelectImage.Location = new System.Drawing.Point(0, 10);
-            this.SelectImage.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
+            this.SelectImage.Location = new System.Drawing.Point(0, 3);
             this.SelectImage.Name = "SelectImage";
-            this.SelectImage.Size = new System.Drawing.Size(373, 56);
+            this.SelectImage.Size = new System.Drawing.Size(160, 23);
             this.SelectImage.TabIndex = 3;
             this.SelectImage.SelectedIndexChanged += new System.EventHandler(this.SelectImage_SelectedIndexChanged);
             // 
             // InputControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(20F, 48F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.SelectImage);
             this.Controls.Add(this.SelectedImage);
-            this.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.Name = "InputControl";
-            this.Size = new System.Drawing.Size(423, 531);
+            this.Size = new System.Drawing.Size(164, 174);
             this.Load += new System.EventHandler(this.SelectionControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.SelectedImage)).EndInit();
             this.ResumeLayout(false);
