@@ -29,7 +29,6 @@ namespace CVBitWiseOperations.Controls
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ColorDisplay));
             this.ImageSelection = new CVBitWiseOperations.Controls.InputControl();
             this.R = new System.Windows.Forms.Label();
             this.G = new System.Windows.Forms.Label();
@@ -46,14 +45,14 @@ namespace CVBitWiseOperations.Controls
             // 
             this.ImageSelection.Location = new System.Drawing.Point(3, 3);
             this.ImageSelection.Name = "ImageSelection";
-            this.ImageSelection.Size = new System.Drawing.Size(148, 166);
+            this.ImageSelection.Size = new System.Drawing.Size(164, 180);
             this.ImageSelection.TabIndex = 0;
             this.ImageSelection.Load += new System.EventHandler(this.ImageSelection_Load);
             // 
             // R
             // 
             this.R.AutoSize = true;
-            this.R.Location = new System.Drawing.Point(157, 52);
+            this.R.Location = new System.Drawing.Point(177, 43);
             this.R.Name = "R";
             this.R.Size = new System.Drawing.Size(14, 15);
             this.R.TabIndex = 2;
@@ -63,7 +62,7 @@ namespace CVBitWiseOperations.Controls
             // G
             // 
             this.G.AutoSize = true;
-            this.G.Location = new System.Drawing.Point(156, 72);
+            this.G.Location = new System.Drawing.Point(176, 63);
             this.G.Name = "G";
             this.G.Size = new System.Drawing.Size(15, 15);
             this.G.TabIndex = 4;
@@ -73,7 +72,7 @@ namespace CVBitWiseOperations.Controls
             // B
             // 
             this.B.AutoSize = true;
-            this.B.Location = new System.Drawing.Point(156, 94);
+            this.B.Location = new System.Drawing.Point(176, 85);
             this.B.Name = "B";
             this.B.Size = new System.Drawing.Size(14, 15);
             this.B.TabIndex = 6;
@@ -82,7 +81,7 @@ namespace CVBitWiseOperations.Controls
             // GreyScale
             // 
             this.GreyScale.AutoSize = true;
-            this.GreyScale.Location = new System.Drawing.Point(156, 123);
+            this.GreyScale.Location = new System.Drawing.Point(173, 114);
             this.GreyScale.Name = "GreyScale";
             this.GreyScale.Size = new System.Drawing.Size(58, 15);
             this.GreyScale.TabIndex = 8;
@@ -90,7 +89,7 @@ namespace CVBitWiseOperations.Controls
             // 
             // Display
             // 
-            this.Display.Location = new System.Drawing.Point(156, 12);
+            this.Display.Location = new System.Drawing.Point(173, 3);
             this.Display.Name = "Display";
             this.Display.Size = new System.Drawing.Size(75, 23);
             this.Display.TabIndex = 9;
@@ -101,7 +100,7 @@ namespace CVBitWiseOperations.Controls
             // RValue
             // 
             this.RValue.AutoSize = true;
-            this.RValue.Location = new System.Drawing.Point(180, 52);
+            this.RValue.Location = new System.Drawing.Point(197, 43);
             this.RValue.Name = "RValue";
             this.RValue.Size = new System.Drawing.Size(42, 15);
             this.RValue.TabIndex = 10;
@@ -110,7 +109,7 @@ namespace CVBitWiseOperations.Controls
             // GValue
             // 
             this.GValue.AutoSize = true;
-            this.GValue.Location = new System.Drawing.Point(180, 72);
+            this.GValue.Location = new System.Drawing.Point(197, 63);
             this.GValue.Name = "GValue";
             this.GValue.Size = new System.Drawing.Size(43, 15);
             this.GValue.TabIndex = 11;
@@ -119,7 +118,7 @@ namespace CVBitWiseOperations.Controls
             // BValue
             // 
             this.BValue.AutoSize = true;
-            this.BValue.Location = new System.Drawing.Point(180, 94);
+            this.BValue.Location = new System.Drawing.Point(197, 85);
             this.BValue.Name = "BValue";
             this.BValue.Size = new System.Drawing.Size(42, 15);
             this.BValue.TabIndex = 12;
@@ -128,7 +127,7 @@ namespace CVBitWiseOperations.Controls
             // GreyScaleValue
             // 
             this.GreyScaleValue.AutoSize = true;
-            this.GreyScaleValue.Location = new System.Drawing.Point(154, 138);
+            this.GreyScaleValue.Location = new System.Drawing.Point(171, 129);
             this.GreyScaleValue.Name = "GreyScaleValue";
             this.GreyScaleValue.Size = new System.Drawing.Size(86, 15);
             this.GreyScaleValue.TabIndex = 13;
@@ -148,8 +147,9 @@ namespace CVBitWiseOperations.Controls
             this.Controls.Add(this.G);
             this.Controls.Add(this.R);
             this.Controls.Add(this.ImageSelection);
+            this.Inputs = new CVBitWiseOperations.Controls.InputControl[0];
             this.Name = "ColorDisplay";
-            this.Size = new System.Drawing.Size(243, 172);
+            this.Size = new System.Drawing.Size(263, 186);
             this.Load += new System.EventHandler(this.ColorDisplay_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

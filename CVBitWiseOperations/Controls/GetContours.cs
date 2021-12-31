@@ -3,12 +3,9 @@ using Emgu.CV.Structure;
 using Emgu.CV.Util;
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace CVBitWiseOperations.Controls
@@ -32,6 +29,8 @@ namespace CVBitWiseOperations.Controls
             }
         }
 
+        private Action<Mat, VectorOfVectorOfPoint> operation;
+
         public GetContours()
         {
             InitializeComponent();
@@ -42,6 +41,7 @@ namespace CVBitWiseOperations.Controls
         private void GetContours_Load(object sender, EventArgs e)
         {
             Result.NameChanged += Result_NameChanged;
+            operation = (bla, blab) => { };
 
             ColorPicker.BackColor = Color.Red;
             WidthValue.Value = 3;
@@ -52,7 +52,6 @@ namespace CVBitWiseOperations.Controls
             SelectOperation.Items.Add(new SelectOperationItem("Outline", (Mat input, VectorOfVectorOfPoint contours) =>
             {
                 CvInvoke.DrawContours(input, contours, -1, ColorPicker.BackColor.ToMCvScalar(), width);
-                Result.SetImage(input, true);
             }));
 
             SelectOperation.Items.Add(new SelectOperationItem("BoundingRectangle", (Mat input, VectorOfVectorOfPoint contours) =>
@@ -64,7 +63,6 @@ namespace CVBitWiseOperations.Controls
                     Rectangle nicerRect = new Rectangle(boundingRect.X - 5, boundingRect.Y - 5, boundingRect.Width + 10, boundingRect.Height + 10) ;
                     CvInvoke.Rectangle(input, nicerRect, ColorPicker.BackColor.ToMCvScalar(), width);
                 }
-                Result.SetImage(input, true);
             }));
 
             SelectOperation.Items.Add(new SelectOperationItem("ClosestRectangle", (Mat input, VectorOfVectorOfPoint contours) =>
@@ -85,7 +83,6 @@ namespace CVBitWiseOperations.Controls
                         CvInvoke.Line(input, vertices[z], vertices[next], currentColor, width);
                     }
                 }
-                Result.SetImage(input, true);
             }));
 
             SelectOperation.Items.Add(new SelectOperationItem("BoundingCircle", (Mat input, VectorOfVectorOfPoint contours) =>
@@ -96,7 +93,6 @@ namespace CVBitWiseOperations.Controls
                     CircleF currentCircle = CvInvoke.MinEnclosingCircle(contours[i]);
                     CvInvoke.Circle(input, currentCircle.Center.ToPoint(), (int)currentCircle.Radius, ColorPicker.BackColor.ToMCvScalar(), width);
                 }
-                Result.SetImage(input, true);
             }));
         }
 
@@ -105,15 +101,7 @@ namespace CVBitWiseOperations.Controls
             UpdateName(((ICanChangeName)sender).Image, e.OldName, e.NewName);
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void ColorSelection_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
 
         private void ColorPicker_Click(object sender, EventArgs e)
@@ -123,32 +111,44 @@ namespace CVBitWiseOperations.Controls
             {
                 ColorPicker.BackColor = ColorDialog.Color;
             }
+            Draw();
         }
 
         private void WidthValue_ValueChanged(object sender, EventArgs e)
         {
             width = (int)WidthValue.Value;
+            Draw();
         }
 
-        private Mat tempInput;
-        private Mat tempContours;
 
         private void SelectOperation_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tempInput = Input.Image.Clone();
-            tempContours = ContourInput.Image?.Clone() ?? tempInput;
-            VectorOfVectorOfPoint contours = new VectorOfVectorOfPoint();
-            if(tempContours.NumberOfChannels > 1)
-            {
-                CvInvoke.CvtColor(tempContours.Clone(), tempContours, Emgu.CV.CvEnum.ColorConversion.Bgr2Gray);
-            }
-            CvInvoke.FindContours(tempContours, contours, new Mat(), Emgu.CV.CvEnum.RetrType.External, Emgu.CV.CvEnum.ChainApproxMethod.ChainApproxNone);
-            if (tempInput.NumberOfChannels == 1)
-            {
-                CvInvoke.CvtColor(tempInput.Clone(), tempInput, Emgu.CV.CvEnum.ColorConversion.Gray2Bgr);
-            }
+            operation = ((SelectOperationItem)SelectOperation.SelectedItem).Operation;
+            Draw();
+        }
 
-            ((SelectOperationItem)SelectOperation.SelectedItem).Operation(tempInput, contours);
+        private Mat tempInput = new Mat();
+        private Mat tempContours = new Mat();
+        private void Draw()
+        {
+            if (Input.Image != null && ContourInput.Image != null)
+            {
+                tempInput = Input.Image.Clone();
+                tempContours = ContourInput.Image.Clone();
+                VectorOfVectorOfPoint contours = new VectorOfVectorOfPoint();
+                if (tempContours.NumberOfChannels > 1)
+                {
+                    CvInvoke.CvtColor(tempContours.Clone(), tempContours, Emgu.CV.CvEnum.ColorConversion.Bgr2Gray);
+                }
+                CvInvoke.FindContours(tempContours, contours, new Mat(), Emgu.CV.CvEnum.RetrType.External, Emgu.CV.CvEnum.ChainApproxMethod.ChainApproxNone);
+                if (tempInput.NumberOfChannels == 1)
+                {
+                    CvInvoke.CvtColor(tempInput.Clone(), tempInput, Emgu.CV.CvEnum.ColorConversion.Gray2Bgr);
+                }
+
+                operation(tempInput, contours);
+                Result.SetImage(tempInput, true);
+            }
         }
     }
 }

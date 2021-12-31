@@ -63,11 +63,11 @@ namespace CVBitWiseOperations.Controls
             SetImage(BaseUserControl.SavedImages[(string)SelectImage.SelectedItem], true);
             if (oldImage != null)
             {
-                ImageReturned?.Invoke(this, new NewImageEvent(oldImage.Clone(), Image.Clone()));
+                ImageReturned?.Invoke(this, new NewImageEvent(oldImage, Image));
             }
             else
             {
-                ImageReturned?.Invoke(this, new NewImageEvent(null, Image.Clone()));
+                ImageReturned?.Invoke(this, new NewImageEvent(null, Image));
             }
 
         }
@@ -80,7 +80,7 @@ namespace CVBitWiseOperations.Controls
             {
                 SetImage(CvInvoke.Imread(dialog.FileName), true);
             }
-            ImageReturned?.Invoke(this, new NewImageEvent(null, Image.Clone()));
+            ImageReturned?.Invoke(this, new NewImageEvent(null, Image));
         }
     }
 }
