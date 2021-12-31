@@ -6,23 +6,22 @@ using System.Text;
 
 namespace CVBitWiseOperations.Controls
 {
-    public struct NewNameEvent
+    public struct UpdateNameEvent
     {
         public string OldName { get; set; }
         public string NewName { get; set; }
 
-        public NewNameEvent(string oldValue, string newValue)
+        public UpdateNameEvent(string oldValue, string newValue)
         {
             OldName = oldValue;
             NewName = newValue;
         }
     }
 
-    public interface ICanChangeName
+    public interface ICanUpdateName
     {
-        public event EventHandler<NewNameEvent> NameChanged;
+        public event EventHandler<UpdateNameEvent> NameUpdated;
 
         public Mat Image { get; }
-        //might need to add the setImage function
     }
 }

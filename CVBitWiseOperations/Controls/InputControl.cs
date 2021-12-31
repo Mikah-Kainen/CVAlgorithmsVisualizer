@@ -51,6 +51,16 @@ namespace CVBitWiseOperations.Controls
             SelectImage.Items.Add(input);
         }
 
+        public void SetInput(string input)
+        {
+            if (SelectImage.Items.Contains(input))
+            {
+                SelectImage.SelectedItem = input;
+            }
+        }
+
+        public string SelectedItem => SelectImage.SelectedItem.ToString();
+
         private void SelectionControl_Load(object sender, EventArgs e)
         {
 

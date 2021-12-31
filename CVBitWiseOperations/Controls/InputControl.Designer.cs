@@ -48,6 +48,7 @@ namespace CVBitWiseOperations.Controls
             // 
             // SelectImage
             // 
+            this.SelectImage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.SelectImage.FormattingEnabled = true;
             this.SelectImage.Location = new System.Drawing.Point(0, 3);
             this.SelectImage.Name = "SelectImage";

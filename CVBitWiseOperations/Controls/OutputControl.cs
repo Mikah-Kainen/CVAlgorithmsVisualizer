@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace CVBitWiseOperations.Controls
 {
-    public partial class OutputControl : UserControl, ICanChangeName
+    public partial class OutputControl : UserControl
     {
         public OutputControl()
         {
@@ -37,9 +37,10 @@ namespace CVBitWiseOperations.Controls
             {
                 OutputImage.Image = image;
             }
+
         }
 
-        public event EventHandler<NewNameEvent> NameChanged;
+        public event EventHandler<UpdateNameEvent> NameUpdated;
 
         private void Output_Click(object sender, EventArgs e)
         {
@@ -69,7 +70,7 @@ namespace CVBitWiseOperations.Controls
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            NameChanged?.Invoke(this, new NewNameEvent(OldName, NameText.Text));
+            NameUpdated?.Invoke(this, new UpdateNameEvent(OldName, NameText.Text));
             OldName = NameText.Text;
         }
 

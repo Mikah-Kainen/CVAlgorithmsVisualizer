@@ -39,7 +39,7 @@ namespace CVBitWiseOperations.Controls
         private Action<int> operation;
         private void BlurControl_Load(object sender, EventArgs e)
         {
-            Result.NameChanged += Result_NameChanged;
+            Result.NameUpdated += Result_NameChanged;
             Mat = new Mat();
             operation = (int x) => { };
             CernelValue.Value = 5;
@@ -51,7 +51,7 @@ namespace CVBitWiseOperations.Controls
         }
 
 
-        private void Result_NameChanged(object sender, NewNameEvent e)
+        private void Result_NameChanged(object sender, UpdateNameEvent e)
         {
             UpdateName(((OutputControl)sender).Image, e.OldName, e.NewName);
         }

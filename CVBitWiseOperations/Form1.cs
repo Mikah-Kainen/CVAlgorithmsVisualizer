@@ -127,7 +127,6 @@ namespace CVBitWiseOperations
 
             output1.SetImage(image1.ToMat(), false);
             output2.SetImage(image2.ToMat(), false);
-            //maybe I do need to clone
 
             MyTabs.SelectedTab.Controls.OfType<FlowLayoutPanel>().ToArray()[0].Controls.Add(output1);
             MyTabs.SelectedTab.Controls.OfType<FlowLayoutPanel>().ToArray()[0].Controls.Add(output2);

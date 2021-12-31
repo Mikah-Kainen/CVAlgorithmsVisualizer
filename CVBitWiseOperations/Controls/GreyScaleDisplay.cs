@@ -20,24 +20,6 @@ namespace CVBitWiseOperations.Controls
         private void GreyScaleDisplay_Load(object sender, EventArgs e)
         {
             Input.ImageReturned += Input_ImageReturned;
-            ROutput.NameChanged += ROutput_NameChanged;
-            GOutput.NameChanged += GOutput_NameChanged;
-            BOutput.NameChanged += BOutput_NameChanged;
-        }
-
-        private void BOutput_NameChanged(object sender, NewNameEvent e)
-        {
-            UpdateName(((ICanChangeName)sender).Image, e.OldName, e.NewName);
-        }
-
-        private void GOutput_NameChanged(object sender, NewNameEvent e)
-        {
-            UpdateName(((ICanChangeName)sender).Image, e.OldName, e.NewName);
-        }
-
-        private void ROutput_NameChanged(object sender, NewNameEvent e)
-        {
-            UpdateName(((ICanChangeName)sender).Image, e.OldName, e.NewName);
         }
 
         private void Input_ImageReturned(object sender, NewImageEvent e)

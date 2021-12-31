@@ -40,7 +40,6 @@ namespace CVBitWiseOperations.Controls
 
         private void GetContours_Load(object sender, EventArgs e)
         {
-            Result.NameChanged += Result_NameChanged;
             operation = (bla, blab) => { };
 
             ColorPicker.BackColor = Color.Red;
@@ -94,11 +93,6 @@ namespace CVBitWiseOperations.Controls
                     CvInvoke.Circle(input, currentCircle.Center.ToPoint(), (int)currentCircle.Radius, ColorPicker.BackColor.ToMCvScalar(), width);
                 }
             }));
-        }
-
-        private void Result_NameChanged(object sender, NewNameEvent e)
-        {
-            UpdateName(((ICanChangeName)sender).Image, e.OldName, e.NewName);
         }
 
 

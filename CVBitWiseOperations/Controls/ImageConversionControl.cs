@@ -38,7 +38,7 @@ namespace CVBitWiseOperations.Controls
 
         private void ImageConversionControl_Load(object sender, EventArgs e)
         {
-            Result.NameChanged += Result_NameChanged;
+            Result.NameUpdated += Result_NameChanged;
             Mat = new Mat();
             SelectConversion.Items.Add(new SelectConversionItem("RGB To GreyScale", () =>
             {
@@ -57,7 +57,7 @@ namespace CVBitWiseOperations.Controls
             }));
         }
 
-        private void Result_NameChanged(object sender, NewNameEvent e)
+        private void Result_NameChanged(object sender, UpdateNameEvent e)
         {
             UpdateName(((OutputControl)sender).Image, e.OldName, e.NewName);
         }

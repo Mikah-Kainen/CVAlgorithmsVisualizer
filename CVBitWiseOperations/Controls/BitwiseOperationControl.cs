@@ -53,18 +53,11 @@ namespace CVBitWiseOperations.Controls
 
         private void BitwiseOperationControl_Load(object sender, EventArgs e)
         {
-            Result.NameChanged += Result_NameChanged;
-
             SelectOperation.Items.Add(new Operation("OR", (a, b, c) => CvInvoke.BitwiseOr(a, b, c)));
             SelectOperation.Items.Add(new Operation("AND", (a, b, c) => CvInvoke.BitwiseAnd(a, b, c)));
             SelectOperation.Items.Add(new Operation("Not", (a, b, c) => CvInvoke.BitwiseNot(b, c)));
             SelectOperation.Items.Add(new Operation("Xor", (a, b, c) => CvInvoke.BitwiseXor(a, b, c)));
             SelectOperation.Items.Add(new Operation("AbsDiff", (a, b, c) => CvInvoke.AbsDiff(a, b, c)));
-        }
-
-        private void Result_NameChanged(object sender, NewNameEvent e)
-        {
-            UpdateName(((ICanChangeName)sender).Image, e.OldName, e.NewName);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
