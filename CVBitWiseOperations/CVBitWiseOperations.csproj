@@ -10,6 +10,7 @@
     <PackageReference Include="Emgu.CV" Version="4.5.4.4788" />
     <PackageReference Include="Emgu.CV.runtime.windows" Version="4.5.4.4788" />
     <PackageReference Include="Emgu.CV.UI" Version="4.5.4.4788" />
+    <PackageReference Include="System.Management" Version="6.0.0" />
   </ItemGroup>
 
 </Project>

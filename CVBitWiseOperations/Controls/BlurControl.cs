@@ -12,16 +12,15 @@ namespace CVBitWiseOperations.Controls
 {
     public partial class BlurControl : BaseUserControl
     {
-
-        public struct CernelSizeSelectionItem
+        public struct SelectBlurItem
         {
             public string Name { get; set; }
-            public int CernelSize { get; set; }
+            public Action<int> Blur { get; set; }
 
-            public CernelSizeSelectionItem(string name, int cernelSize)
+            public SelectBlurItem(string name, Action<int> blur)
             {
                 Name = name;
-                CernelSize = cernelSize;
+                Blur = blur;
             }
 
             public override string ToString()
@@ -37,23 +36,20 @@ namespace CVBitWiseOperations.Controls
             InitializeComponent();
         }
 
+        private Action<int> operation;
         private void BlurControl_Load(object sender, EventArgs e)
         {
             Result.NameChanged += Result_NameChanged;
             Mat = new Mat();
-            SelectCernelSize.Items.Add(new CernelSizeSelectionItem("3 by 3", 3));
-            SelectCernelSize.Items.Add(new CernelSizeSelectionItem("5 by 5", 5));
-            SelectCernelSize.Items.Add(new CernelSizeSelectionItem("7 by 7", 7));
-            SelectCernelSize.Items.Add(new CernelSizeSelectionItem("9 by 9", 9));
-            SelectCernelSize.Items.Add(new CernelSizeSelectionItem("11 by 11", 11));
+            operation = (int x) => { };
+            CernelValue.Value = 5;
+            CernelValue.Minimum = 0;
+            CernelValue.Maximum = 500;
+            SelectBlur.Items.Add(new SelectBlurItem("Simple", (int cernel) => CvInvoke.Blur(Input.Image.Clone(), Mat, new Size(cernel, cernel), new Point(-1, -1))));
+            SelectBlur.Items.Add(new SelectBlurItem("Gaussian", (int cernel) => CvInvoke.GaussianBlur(Input.Image.Clone(), Mat, new Size(cernel, cernel), 0)));
+            SelectBlur.Items.Add(new SelectBlurItem("Median", (int cernel) => CvInvoke.MedianBlur(Input.Image.Clone(), Mat, cernel)));
         }
 
-        private void SelectCernelSize_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int cernelSize = ((CernelSizeSelectionItem)SelectCernelSize.SelectedItem).CernelSize;
-            CvInvoke.Blur(Input.Image, Mat, new Size(cernelSize, cernelSize), new Point(-1, -1));
-            Result.SetImage(Mat, true);
-        }
 
         private void Result_NameChanged(object sender, NewNameEvent e)
         {
@@ -91,5 +87,35 @@ namespace CVBitWiseOperations.Controls
             return returnArray;
         }
 
+        private int previousCernel = 0;
+        private void CernelValue_ValueChanged(object sender, EventArgs e)
+        {
+            if(CernelValue.Value < 3)
+            {
+                CernelValue.Value = 3;
+            }
+            if(CernelValue.Value % 2 == 0)
+            {
+                if(previousCernel < CernelValue.Value)
+                {
+                    CernelValue.Value += 1;
+                }
+                else
+                {
+                    CernelValue.Value -= 1;
+                }
+            }
+            previousCernel = (int)CernelValue.Value;
+            int cernelSize = (int)CernelValue.Value;
+            operation(((int)CernelValue.Value));
+            Result.SetImage(Mat, true);
+        }
+
+        private void SelectBlur_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            operation = ((SelectBlurItem)SelectBlur.SelectedItem).Blur;
+            operation(((int)CernelValue.Value));
+            Result.SetImage(Mat, true);
+        }
     }
 }

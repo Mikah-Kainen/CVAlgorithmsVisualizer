@@ -27,17 +27,17 @@ namespace CVBitWiseOperations.Controls
 
         private void BOutput_NameChanged(object sender, NewNameEvent e)
         {
-            UpdateName(((ICanChangeName)sender).Image.Clone(), e.OldName, e.NewName);
+            UpdateName(((ICanChangeName)sender).Image, e.OldName, e.NewName);
         }
 
         private void GOutput_NameChanged(object sender, NewNameEvent e)
         {
-            UpdateName(((ICanChangeName)sender).Image.Clone(), e.OldName, e.NewName);
+            UpdateName(((ICanChangeName)sender).Image, e.OldName, e.NewName);
         }
 
         private void ROutput_NameChanged(object sender, NewNameEvent e)
         {
-            UpdateName(((ICanChangeName)sender).Image.Clone(), e.OldName, e.NewName);
+            UpdateName(((ICanChangeName)sender).Image, e.OldName, e.NewName);
         }
 
         private void Input_ImageReturned(object sender, NewImageEvent e)
