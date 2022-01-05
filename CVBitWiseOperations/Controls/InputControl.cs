@@ -59,7 +59,7 @@ namespace CVBitWiseOperations.Controls
             }
         }
 
-        public string SelectedItem => SelectImage.SelectedItem.ToString();
+        public string SelectedItem => SelectImage.SelectedItem?.ToString();
 
         private void SelectionControl_Load(object sender, EventArgs e)
         {
@@ -70,7 +70,7 @@ namespace CVBitWiseOperations.Controls
         {
             using Mat oldImage = Image?.Clone();
 
-            SetImage(BaseUserControl.SavedImages[(string)SelectImage.SelectedItem], true);
+            SetImage(BaseUserControl.SavedOutputs[(string)SelectImage.SelectedItem].Image, true);
             if (oldImage != null)
             {
                 ImageReturned?.Invoke(this, new NewImageEvent(oldImage, Image));

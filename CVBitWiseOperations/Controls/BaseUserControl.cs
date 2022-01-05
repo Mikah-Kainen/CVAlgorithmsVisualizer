@@ -12,15 +12,13 @@ using System.Linq;
 
 namespace CVBitWiseOperations.Controls
 {
-    public partial class BaseUserControl : UserControl, ICanUpdateImage, ICanUpdateName
+    public partial class BaseUserControl : UserControl
     {
-        public static readonly Dictionary<string, Mat> SavedImages = new Dictionary<string, Mat>();
+        public static readonly Dictionary<string, OutputControl> SavedOutputs = new Dictionary<string, OutputControl>();
         public static readonly List<BaseUserControl> AllControls = new List<BaseUserControl>();
 
-        public event EventHandler<UpdateImageEvent> ImageUpdate;
-        public event EventHandler<UpdateNameEvent> NameUpdated;
-
         public InputControl[] Inputs { get; set; }
+        public OutputControl[] Outputs { get; set; }
 
         public virtual Mat Image { get; }
 
@@ -31,58 +29,76 @@ namespace CVBitWiseOperations.Controls
 
         private void BaseUserControl_Load(object sender, EventArgs e)
         {
-            this.ImageUpdate += UpdateForImage;
-            this.NameUpdated += UpdateForName;
 
-
-            AllControls.Add(this);
-            Inputs = Controls.OfType<InputControl>().ToArray();
-            foreach(KeyValuePair<string, Mat> kvp in SavedImages)
+            Outputs = Controls.OfType<OutputControl>().ToArray();
+            foreach (OutputControl output in Outputs)
             {
-                for(int i = 0; i < Inputs.Length; i ++)
+                output.ImageUpdated += UpdateForImage;
+                output.NameUpdated += UpdateForName;
+            }
+
+            Inputs = Controls.OfType<InputControl>().ToArray();
+            foreach (InputControl input in Inputs)
+            {
+                input.ImageReturned += RunIfReady;
+            }
+
+            foreach (KeyValuePair<string, OutputControl> kvp in SavedOutputs)
+            {
+                for (int i = 0; i < Inputs.Length; i++)
                 {
                     Inputs[i].AddInput(kvp.Key);
                 }
             }
+
+            AllControls.Add(this);
+        }
+
+        public virtual void RunIfReady(object sender, NewImageEvent e)
+        {
         }
 
         private void UpdateForImage(object sender, UpdateImageEvent e)
         {
-            UpdateImage(((ICanUpdateImage)sender).Name, e.OldImage, e.NewImage);
+            UpdateImage(((OutputControl)sender).ImageName, (OutputControl)sender);
         }
 
         private void UpdateForName(object sender, UpdateNameEvent e)
         {
-            UpdateName(((ICanUpdateName)sender).Image, e.OldName, e.NewName);
+            UpdateName(((OutputControl)sender), e.OldName, e.NewName);
         }
 
-        public void UpdateName(Mat targetMat, string oldName, string newName)
+        public void UpdateName(OutputControl output, string oldName, string newName)
         {
-            if (oldName == newName) { 
-                return; }
-            if (SavedImages.ContainsKey(newName)) { 
-                return; }
-
-            if (oldName != null && SavedImages.ContainsKey(oldName))
+            if (oldName == newName)
             {
+                return;
+            }
+            if (SavedOutputs.ContainsKey(newName))
+            {
+                return;
+            }
+
+            if (oldName != null && SavedOutputs.ContainsKey(oldName))
+            {
+                SavedOutputs.Add(newName, output);
                 for (int z = 0; z < AllControls.Count; z++)
                 {
                     for (int i = 0; i < AllControls[z].Inputs.Length; i++)
                     {
-                        if(AllControls[z].Inputs[i].SelectedItem == oldName)
+                        AllControls[z].Inputs[i].AddInput(newName);
+                        if (AllControls[z].Inputs[i].SelectedItem == oldName)
                         {
                             AllControls[z].Inputs[i].SetInput(newName);
                         }
                         AllControls[z].Inputs[i].RemoveInput(oldName);
-                        AllControls[z].Inputs[i].AddInput(newName);
                     }
                 }
-                SavedImages.Remove(oldName);
-                SavedImages.Add(newName, targetMat);
+                SavedOutputs.Remove(oldName);
             }
             else
             {
-                SavedImages.Add(newName, targetMat);
+                SavedOutputs.Add(newName, output);
                 for (int z = 0; z < AllControls.Count; z++)
                 {
                     for (int i = 0; i < AllControls[z].Inputs.Length; i++)
@@ -93,37 +109,19 @@ namespace CVBitWiseOperations.Controls
             }
         }
 
-        public void UpdateImage(string targetName, Mat oldImage, Mat newImage)
+        public void UpdateImage(string targetName, OutputControl sender)
         {
-            if (oldImage == newImage) { 
-                return; }
-
-            if (oldImage != null && SavedImages.ContainsValue(oldImage) && SavedImages[targetName] == oldImage)
+            if (!SavedOutputs.ContainsKey(targetName))
             {
-                for (int z = 0; z < AllControls.Count; z++)
-                {
-                    for (int i = 0; i < AllControls[z].Inputs.Length; i++)
-                    {
-                        if(AllControls[z].Inputs[i].SelectedItem == targetName)
-                        {
-                            AllControls[z].Inputs[i].SetImage(newImage, false);
-                        }
-                    }
-                }
-                SavedImages.Remove(targetName);
-                SavedImages.Add(targetName, newImage);
+                SavedOutputs.Add(targetName, sender);
             }
-            else
+            for (int z = 0; z < AllControls.Count; z++)
             {
-                SavedImages.Add(targetName, newImage);
-                for (int z = 0; z < AllControls.Count; z++)
+                for (int i = 0; i < AllControls[z].Inputs.Length; i++)
                 {
-                    for (int i = 0; i < AllControls[z].Inputs.Length; i++)
+                    if (AllControls[z].Inputs[i].SelectedItem == targetName)
                     {
-                        if (AllControls[z].Inputs[i].SelectedItem == targetName)
-                        {
-                            AllControls[z].Inputs[i].SetImage(newImage, false);
-                        }
+                        AllControls[z].Inputs[i].SetImage(sender.Image, true);
                     }
                 }
             }

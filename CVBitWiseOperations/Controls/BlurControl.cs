@@ -39,7 +39,6 @@ namespace CVBitWiseOperations.Controls
         private Action<int> operation;
         private void BlurControl_Load(object sender, EventArgs e)
         {
-            Result.NameUpdated += Result_NameChanged;
             Mat = new Mat();
             operation = (int x) => { };
             CernelValue.Value = 5;
@@ -51,26 +50,21 @@ namespace CVBitWiseOperations.Controls
         }
 
 
-        private void Result_NameChanged(object sender, UpdateNameEvent e)
-        {
-            UpdateName(((OutputControl)sender).Image, e.OldName, e.NewName);
-        }
-
-        public Color[][] Blur (Color[][] colors, int cernel)
+        public Color[][] Blur(Color[][] colors, int cernel)
         {
             Color[][] returnArray = new Color[colors.Length][];
             int margin = (cernel - 1) / 2;
-            for(int y = margin; y < colors.Length - margin; y++)
+            for (int y = margin; y < colors.Length - margin; y++)
             {
                 returnArray[y] = new Color[colors[y].Length];
-                for(int x = margin; x < colors[y].Length - margin; x ++)
+                for (int x = margin; x < colors[y].Length - margin; x++)
                 {
                     int R = 0;
                     int G = 0;
                     int B = 0;
-                    for(int y2 = -margin; y2 < margin + 1; y2 ++)
+                    for (int y2 = -margin; y2 < margin + 1; y2++)
                     {
-                        for(int x2 = -margin; x2 < margin + 1; x2 ++)
+                        for (int x2 = -margin; x2 < margin + 1; x2++)
                         {
                             Color currentColor = colors[y + y2][x + x2];
                             R += currentColor.R;
@@ -90,13 +84,13 @@ namespace CVBitWiseOperations.Controls
         private int previousCernel = 0;
         private void CernelValue_ValueChanged(object sender, EventArgs e)
         {
-            if(CernelValue.Value < 3)
+            if (CernelValue.Value < 3)
             {
                 CernelValue.Value = 3;
             }
-            if(CernelValue.Value % 2 == 0)
+            if (CernelValue.Value % 2 == 0)
             {
-                if(previousCernel < CernelValue.Value)
+                if (previousCernel < CernelValue.Value)
                 {
                     CernelValue.Value += 1;
                 }
@@ -116,6 +110,7 @@ namespace CVBitWiseOperations.Controls
             operation = ((SelectBlurItem)SelectBlur.SelectedItem).Blur;
             operation(((int)CernelValue.Value));
             Result.SetImage(Mat, true);
+
         }
     }
 }

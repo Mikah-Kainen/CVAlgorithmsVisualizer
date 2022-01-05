@@ -29,6 +29,9 @@ namespace CVBitWiseOperations.Controls
 
         public void SetImage(Mat image, bool shouldClone)
         {
+            if (image == null) { return; }
+
+            using Mat old = Image?.Clone();
             if(shouldClone)
             {
                 OutputImage.Image = image.Clone();
@@ -37,10 +40,12 @@ namespace CVBitWiseOperations.Controls
             {
                 OutputImage.Image = image;
             }
-
+            ImageUpdated?.Invoke(this, new UpdateImageEvent(old?.Clone(), Image.Clone()));
+            //might need to not have a clone here later
         }
 
         public event EventHandler<UpdateNameEvent> NameUpdated;
+        public event EventHandler<UpdateImageEvent> ImageUpdated;
 
         private void Output_Click(object sender, EventArgs e)
         {
@@ -61,6 +66,7 @@ namespace CVBitWiseOperations.Controls
             NameText.Size = new Size(minWidth, NameText.Height);
         }
 
+        public string ImageName => NameText.Text;
         private void NameText_TextChanged(object sender, EventArgs e)
         {
             Size sizeOfText = TextRenderer.MeasureText(NameText.Text, Font);
